@@ -22,10 +22,6 @@ const User = () => {
             setRentalData([{ name: 'Usama', email: '321@gmail.com', id: 76876 }, { name: 'Ariz', email: '901@gmail.com', id: 56565 }])
         }
     };
-    useEffect(() => {
-        alert('Here is the FeedBack from Owner and Client side')
-    }, [])
-
     return (
         <View>
             <Picker

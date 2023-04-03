@@ -5,6 +5,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { app } from '../../firebase'
+import { getAuth, signInWithEmailAndPassword, } from 'firebase/auth';
 const LoginSchema = Yup.object().shape({
     email: Yup.string()
         .email('Invalid email')
@@ -17,12 +19,26 @@ const SignIn = ({ navigation }) => {
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const auth = getAuth(app);
+    const handleLogIn = async (values) => {
+        const { email, password } = values;
+        try {
+            const user = await signInWithEmailAndPassword(auth, email, password);
+            // console.log('LogIn Successful', user);
+            if (email == 'admin@gmail.com') {
+                navigation.navigate('Main')
+            }
+            else {
+                navigation.navigate('Test')
+            }
+        } catch (err) { 'LogIn Error', console.log(err) }
+    }
     return (
         <Formik
-            initialValues={{ email: email, password: password }}
-            onSubmit={values => {
+            initialValues={{ email: '', password: '' }}
+            onSubmit={(values) => {
                 console.log(values);
-                navigation.navigate('Main');
+                handleLogIn(values)
             }}
             validationSchema={LoginSchema}
         >
@@ -42,6 +58,7 @@ const SignIn = ({ navigation }) => {
                             <TextInput
                                 placeholder='Enter Email'
                                 onChangeText={handleChange('email')}
+                                // onChangeText={(text) => values.setEmail(text)}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
                                 style={styles.textInput} autoCapitalize='none'
