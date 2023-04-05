@@ -7,7 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUp from './screens/Accounts/SignUp';
 import Otp from './screens/Accounts/Otp';
 import Main from './DrawerNavigation/Main';
-import Test from './screens/Owner/Test';
+import OwnerMain from './OwnerDrawerNavigation/OwnerMain';
 const Stack = createNativeStackNavigator()
 // import { createDrawerNavigator } from '@react-navigation/drawer';
 // const Drawer = createDrawerNavigator();
@@ -21,7 +21,7 @@ export default function App() {
           <Stack.Screen name='Main' component={Main} options={{ headerShown: false }} />
           <Stack.Screen name='Sign Up Screen' component={SignUp} />
           <Stack.Screen name='OTP' component={Otp} />
-          <Stack.Screen name='Test' component={Test} />
+          <Stack.Screen name='Owner' component={OwnerMain} options={{ headerShown: false }} />
           {/* <Drawer.Navigator useLegacyImplementation>
             <Drawer.Screen name="Test" component={Test} />
             <Drawer.Screen name="Test1" component={Test1} />
