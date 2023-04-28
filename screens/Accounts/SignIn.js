@@ -29,7 +29,7 @@ const SignIn = ({ navigation }) => {
                 navigation.navigate('Main')
             }
             else {
-                navigation.navigate('Owner')
+                navigation.navigate('OwnerMain')
             }
         } catch (err) { 'LogIn Error', console.log(err) }
     }

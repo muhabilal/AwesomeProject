@@ -21,7 +21,7 @@ export default function App() {
           <Stack.Screen name='Main' component={Main} options={{ headerShown: false }} />
           <Stack.Screen name='Sign Up Screen' component={SignUp} />
           <Stack.Screen name='OTP' component={Otp} />
-          <Stack.Screen name='Owner' component={OwnerMain} options={{ headerShown: false }} />
+          <Stack.Screen name='OwnerMain' component={OwnerMain} options={{ headerShown: false }} />
           {/* <Drawer.Navigator useLegacyImplementation>
             <Drawer.Screen name="Test" component={Test} />
             <Drawer.Screen name="Test1" component={Test1} />

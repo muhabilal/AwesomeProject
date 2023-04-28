@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as ImagePicker from 'expo-image-picker';
 import Btn from './components/Btn';
-const ByAdd = () => {
+
+const ByBidding = () => {
     const [roomData, setRoomData] = useState([]);
     const [image, setImage] = useState(null);
     const [rooms, setRooms] = useState('');
@@ -12,6 +13,18 @@ const ByAdd = () => {
     const [kitchen, setKitchen] = useState('');
     const [address, setAddress] = useState('');
     const [price, setPrice] = useState('');
+    const [days, setDays] = useState(0);
+    const [remainingTime, setRemainingTime] = useState(0);
+    const calculateTime = () => {
+        const remainingTime = days * 24 * 60 * 60; // Convert days to seconds
+        return remainingTime;
+    };
+
+    const startTimer = () => {
+        setInterval(() => {
+            setRemainingTime(prevTime => prevTime - 1);
+        }, 1000);
+    };
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -38,7 +51,7 @@ const ByAdd = () => {
     };
 
     const addRoom = () => {
-        const newRoomData = [...roomData, { id: Math.random().toString(), rooms, size, bathrooms, kitchen, address, price, image }];
+        const newRoomData = [...roomData, { id: Math.random().toString(), rooms, size, bathrooms, kitchen, address, price, image, remainingTime }];
         setRoomData(newRoomData);
         setRooms('');
         setSize('');
@@ -47,6 +60,9 @@ const ByAdd = () => {
         setAddress('');
         setPrice('');
         setImage(null);
+        setRemainingTime(calculateTime());
+        startTimer();
+        setDays(0);
     };
     const [searchQuery, setSearchQuery] = React.useState('');
     return (
@@ -98,17 +114,27 @@ const ByAdd = () => {
                     <Text>Price:</Text>
                     <TextInput placeholder='Enter Price' value={price} onChangeText={setPrice} style={styles.textInput} />
                 </View>
+                <View>
+                    <TextInput
+                        placeholder="Enter number of days"
+                        keyboardType="numeric"
+                        onChangeText={text => setDays(parseInt(text))}
+                    />
+                </View>
                 <Btn btnName={'Submit'} press={addRoom} />
                 <FlatList
                     data={roomData}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <View>
+                        <View style={styles.list}>
                             <Image source={{ uri: item.image }} style={{ width: 100, height: 100 }} />
                             <View>
-                                <Text>{item.rooms}</Text>
-                                <Text>{item.roomSize} - {item.bathrooms} - {item.kitchen}</Text>
-                                <Text>{item.address}-{item.price}</Text>
+                                <Text>Rooms:{item.rooms} Room Size:{item.size}</Text>
+                                <Text>BathRooms:{item.bathrooms} Kitchen{item.kitchen}</Text>
+                                <Text>Address:{item.address}</Text>
+                                <Text>Price:{item.price}</Text>
+                                <Text>{`${Math.floor(remainingTime / 86400)} days, ${Math.floor((remainingTime % 86400) / 3600)} hours, `}</Text>
+                                {/* <Text>{`${Math.floor((remainingTime % 3600) / 60)} minutes, ${remainingTime % 60} seconds`}</Text> */}
                             </View>
                         </View>
                     )}
@@ -118,7 +144,7 @@ const ByAdd = () => {
     )
 }
 
-export default ByAdd
+export default ByBidding
 
 const styles = StyleSheet.create({
     container: {
@@ -167,5 +193,12 @@ const styles = StyleSheet.create({
     textInput: {
         borderBottomWidth: 1,
         borderBottomColor: '#f2f2f2',
+    },
+    list: {
+        flexDirection: 'row',
+        gap: 10,
+        borderWidth: 0.5,
+        with: '100%',
+        marginTop: 5,
     }
 })

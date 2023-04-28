@@ -56,8 +56,8 @@ const DrawerOwner = (props) => {
                                     size={size}
                                 />
                             )}
-                            label="By Add"
-                            onPress={() => { props.navigation.navigate('Add Approval (Biding)') }}
+                            label="By Ad"
+                            onPress={() => { props.navigation.navigate('By Ad') }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -67,41 +67,19 @@ const DrawerOwner = (props) => {
                                     size={size}
                                 />
                             )}
-                            label="Add Approval (Fixed)"
-                            onPress={() => { props.navigation.navigate('Add Approval (Fixed)') }}
+                            label="By Bidding"
+                            onPress={() => { props.navigation.navigate('By Bidding') }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
-                                <FontAwesome
-                                    name="list"
+                                <Icon
+                                    name="home-outline"
                                     color={color}
                                     size={size}
                                 />
                             )}
-                            label="House White/Black List"
-                            onPress={() => { props.navigation.navigate('House White/Black List') }}
-                        />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <FontAwesome
-                                    name="ban"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="User Ban/UnBan"
-                            onPress={() => { props.navigation.navigate('User Ban/UnBan') }}
-                        />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <MaterialCommunityIcons
-                                    name="record-rec"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Total Record"
-                            onPress={() => { props.navigation.navigate('Total Record') }}
+                            label="Message"
+                            onPress={() => { props.navigation.navigate('Message') }}
                         />
                     </Drawer.Section>
                 </View>
