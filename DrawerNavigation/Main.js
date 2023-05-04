@@ -12,10 +12,10 @@ const Main = () => {
         <>
             <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
                 <Drawer.Screen name="Add Approval (Biding)" component={AddApproval} />
-                {/* <Drawer.Screen name="Add Approval (Fixed)" component={AddApprovalFix} />
+                <Drawer.Screen name="Add Approval (Fixed)" component={AddApprovalFix} />
                 <Drawer.Screen name="House White/Black List" component={HouseList} />
                 <Drawer.Screen name="User Ban/UnBan" component={User} />
-                <Drawer.Screen name="Total Record" component={TotalRecord} /> */}
+                <Drawer.Screen name="Total Record" component={TotalRecord} />
             </Drawer.Navigator>
         </>
     )

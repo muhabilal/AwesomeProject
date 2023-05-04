@@ -11,14 +11,14 @@ import {
     Switch
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
     DrawerContentScrollView,
     DrawerItem
 } from '@react-navigation/drawer';
-
-const DrawerOwner = (props) => {
+const DrawerContent = (props) => {
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
@@ -50,8 +50,8 @@ const DrawerOwner = (props) => {
                     <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem
                             icon={({ color, size }) => (
-                                <Icon
-                                    name="home-outline"
+                                <MaterialIcons
+                                    name="add"
                                     color={color}
                                     size={size}
                                 />
@@ -61,8 +61,8 @@ const DrawerOwner = (props) => {
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
-                                <Icon
-                                    name="home-outline"
+                                <MaterialCommunityIcons
+                                    name="beta"
                                     color={color}
                                     size={size}
                                 />
@@ -72,8 +72,8 @@ const DrawerOwner = (props) => {
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
-                                <Icon
-                                    name="home-outline"
+                                <AntDesign
+                                    name="message1"
                                     color={color}
                                     size={size}
                                 />
@@ -101,7 +101,7 @@ const DrawerOwner = (props) => {
     )
 }
 
-export default DrawerOwner
+export default DrawerContent
 
 const styles = StyleSheet.create({
     drawerContent: {

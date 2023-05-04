@@ -99,9 +99,7 @@ const Messages = ({ navigation }) => {
         </View>
     )
 }
-
 export default Messages
-
 const styles = StyleSheet.create({
     img: {
         width: 60,

@@ -17,9 +17,6 @@ const LoginSchema = Yup.object().shape({
     password: Yup.string()
         .min(6, 'Password must be at least 6 characters')
         .required('Required'),
-    confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
-        .required('Confirm Password is required'),
 });
 
 const SignUp = ({ navigation }) => {
@@ -28,23 +25,21 @@ const SignUp = ({ navigation }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("")
+    const [role, setRole] = useState("");
     const auth = getAuth(app);
     const handleSignUp = async (values) => {
         const { email, password } = values;
         try {
-            const user = await createUserWithEmailAndPassword(auth, email, password, name);
+            const user = await createUserWithEmailAndPassword(auth, email, password, name, role);
             console.log("Account created: ", user)
         }
         catch (error) {
             console.log('Account creation failed', error);
         }
-        // console.log("hello")
     }
-
     return (
         <Formik
-            initialValues={{ email: email, password: password, confirmPassword: confirmPassword, name: name }}
+            initialValues={{ email: email, password: password, name: name, role: role }}
             onSubmit={(values) => {
                 handleSignUp(values);
                 navigation.navigate('OTP');
@@ -91,6 +86,21 @@ const SignUp = ({ navigation }) => {
                                 />
                                 {touched.email && errors.email && <Text>{errors.email}</Text>}
                             </View>
+                            <Text style={[styles.text_footer, { marginTop: 30 }]}>Role</Text>
+                            <View style={styles.action}>
+                                <MaterialIcons
+                                    name='supervised-user-circle'
+                                    size={20}
+                                    marginTop={5}
+                                />
+                                <TextInput
+                                    placeholder='Who are you Owner/Rental'
+                                    onChangeText={handleChange('role')}
+                                    onBlur={handleBlur('role')}
+                                    value={values.role}
+                                    style={styles.textInput} autoCapitalize='none'
+                                />
+                            </View>
                             <Text style={[styles.text_footer, { marginTop: 30 }]}>Password</Text>
                             <View style={styles.action}>
                                 <FontAwesome
@@ -112,40 +122,12 @@ const SignUp = ({ navigation }) => {
                                         color="grey"
                                         size={20}
                                     />
-
-                                </TouchableOpacity>
-                            </View>
-                            <Text style={[styles.text_footer, { marginTop: 30 }]}>Confirm Password</Text>
-                            <View style={styles.action}>
-                                <FontAwesome
-                                    name='lock'
-                                    size={20}
-                                    marginTop={5}
-                                />
-                                <TextInput placeholder='Enter Passcode'
-                                    onChangeText={handleChange('confirmPassword')}
-                                    onBlur={handleBlur('confirmPassword')}
-                                    value={values.confirmPassword}
-                                    secureTextEntry={isShow ? false : true}
-                                    style={styles.textInput}
-                                    autoCapitalize='none' />
-                                {touched.confirmPassword && errors.confirmPassword && <Text>{errors.confirmPassword}</Text>}
-                                <TouchableOpacity onPress={() => setIsShow(!isShow)}>
-                                    < Feather
-                                        name={isShow ? 'eye' : 'eye-off'}
-                                        color="grey"
-                                        size={20}
-                                    />
-
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.button}>
                                 <TouchableOpacity style={[styles.signIn, { backgroundColor: '#009387' }]} onPress={handleSubmit}>
                                     <Text style={[styles.text_signIn, { color: '#fff' }]}>Next</Text>
                                 </TouchableOpacity>
-                                {/* <TouchableOpacity style={[styles.signIn, { borderColor: '#009387', borderWidth: 1, marginTop: 15 }]} onPress={() => navigation.navigate('Sign Up Screen')}>
-                                    <Text style={[styles.text_signIn, { color: '#009387' }]}>Sign Up</Text>
-                                </TouchableOpacity> */}
                             </View>
                         </ScrollView>
                     </View>
