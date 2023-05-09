@@ -7,6 +7,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { app } from '../../firebase'
 import { getAuth, createUserWithEmailAndPassword, } from 'firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 const LoginSchema = Yup.object().shape({
     name: Yup.string()
         .matches(/^[a-zA-Z\s]*$/, 'Please enter a valid name')
@@ -28,9 +29,16 @@ const SignUp = ({ navigation }) => {
     const [role, setRole] = useState("");
     const auth = getAuth(app);
     const handleSignUp = async (values) => {
-        const { email, password } = values;
+        const { email, password, name, role } = values;
         try {
-            const user = await createUserWithEmailAndPassword(auth, email, password, name, role);
+            // const user = await createUserWithEmailAndPassword(auth, email, password, name, role);
+            const user = await createUserWithEmailAndPassword(auth, email, password)
+            firestore().collection('users').doc(auth().currentUser.uid).set({
+                uid: auth().currentUser.uid,
+                name,
+                role,
+                email
+            })
             console.log("Account created: ", user)
         }
         catch (error) {
