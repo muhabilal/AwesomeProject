@@ -125,7 +125,7 @@ const SignUp = ({ navigation }) => {
                                     autoCapitalize='none' />
                                 {touched.password && errors.password && <Text>{errors.password}</Text>}
                                 <TouchableOpacity onPress={() => setShow(!show)}>
-                                    < Feather
+                                    <Feather
                                         name={show ? 'eye' : 'eye-off'}
                                         color="grey"
                                         size={20}

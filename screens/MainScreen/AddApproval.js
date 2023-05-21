@@ -95,7 +95,6 @@ const AddApproval = ({ expirationDate }) => {
                             </Card.Content>
                         </Card>
                     ))}
-
                 </ScrollView>
             </View>
         </View>
