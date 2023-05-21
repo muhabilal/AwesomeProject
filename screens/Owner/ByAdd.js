@@ -56,7 +56,7 @@ const ByAdd = () => {
                 <TextInput
                     placeholder='Search'
                     style={styles.Searchinput}
-                    autoCapitalize='none'
+                    autonPressoCapitalize='none'
                     onChangeText={text => setSearchQuery(text)}
                     value={searchQuery}
                 />

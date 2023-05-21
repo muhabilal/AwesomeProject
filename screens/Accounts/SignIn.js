@@ -28,8 +28,11 @@ const SignIn = ({ navigation }) => {
             if (email == 'admin@gmail.com') {
                 navigation.navigate('Main')
             }
-            else {
+            else if (email == 'owner@gmail.com') {
                 navigation.navigate('OwnerMain')
+            }
+            else {
+                navigation.navigate('RentalMain');
             }
         } catch (err) { 'LogIn Error', console.log(err) }
     }
